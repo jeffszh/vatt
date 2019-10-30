@@ -9,7 +9,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.component.textfield.PasswordField
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.router.Route
-import java.lang.StringBuilder
 import kotlin.random.Random
 
 @Route("pwExercise")
@@ -48,8 +47,15 @@ class PwExerciseView : VerticalLayout() {
 	private fun onOkClicked() {
 		inputResult.value = inputArea.value
 		inputArea.isReadOnly = true
-		scoreText.text = if (exampleTextField.value == inputResult.value)
-			"正确" else "错误！！！"
+		if (exampleTextField.value == inputResult.value) {
+			scoreText.text = "正确"
+			scoreText.style["color"] = "blue"
+			scoreText.style.remove("backgroundColor")
+		} else {
+			scoreText.text = "错误！！！"
+			scoreText.style["backgroundColor"] = "red"
+			scoreText.style["color"] = "yellow"
+		}
 	}
 
 	private fun onRedoClicked() {
